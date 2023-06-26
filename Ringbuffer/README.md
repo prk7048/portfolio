@@ -3,6 +3,9 @@
   + 검증하는 로직이 들어가있다
   + ![Test1](https://github.com/prk7048/portfolio/assets/33222301/9f3ed6ea-7e61-4cd7-a72b-d94ae83fe924)
     + 주어진 문자열을 random한 수 만큼 넣고 빼면서 Dequeue한 문자를 화면에 출력해 어긋난 지점이 있는지 검증하고있다.
+    + 검증중 DirectDequeueSize를 1만큼 더 빼서 나타난 상황
+    + ![Error](https://github.com/prk7048/portfolio/assets/33222301/0a65e890-8805-475f-83d4-797ad2215185)
+
   + Front : 다음번에 삭제할 메모리의 위치를 가리키는 포인터
   + Rear : 삽입된 메모리의 위치를 가리키는 포인터
     + 삽입시 Rear + 1의 위치에 삽입되고 삽입된 마지막공간을 가리킨다.

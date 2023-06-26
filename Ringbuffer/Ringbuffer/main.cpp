@@ -61,6 +61,7 @@ int main(void)
 		// dequeue할 size를 결정한다.
 		else
 		{
+			// val = 0 도 나옴, +1해서 0은 안나오게함
 			int val = RingBuffer.GetUseSize() % 80 + 1;
 			dequeue_num = rand() % val;
 		}

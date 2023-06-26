@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <stdio.h>
 
-#define df_RINGBUFFER_SIZE 10000
+#define df_RINGBUFFER_SIZE 600
 
 class CRingBuffer
 {
