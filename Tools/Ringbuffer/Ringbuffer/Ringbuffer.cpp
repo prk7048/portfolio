@@ -1,5 +1,10 @@
 #include "RingBuffer.h"
-
+// Front : 데이터를 뺄 위치
+// Rear :  데이터를 넣을 위치
+// Enqueue : Rear가 가리키는 자리에 데이터 넣고 Rear + 1 (여긴 비어있음)
+// Dequeue : Front가 가리키는 자리에 데이터 빼고 Front + 1 (여긴 채워져있음)
+// Front의 뒤는 비워둬야한다. 
+// Rear가 Front의 바로 뒤일때 Rear에 값을 넣는다면 Rear가 증가하여 Front == Rear가 되어 비어있는것과 같은 상태가 된다.
 
 // Ringbuffer default size : 10000
 CRingBuffer::CRingBuffer()
@@ -36,50 +41,31 @@ int CRingBuffer::GetBufferSize(void)
 	return m_Size;
 }
 
-bool CRingBuffer::isEmpty(void)
-{
-	if (m_Rear == m_Front)
-		return true;
-	else
-		return false;
-}
-
 int CRingBuffer::GetUseSize(void)
 {
-	if (isEmpty())
-		return 0;
-	else if (m_Rear > m_Front)
+
+	if (m_Rear >= m_Front)
 		return (m_Rear - m_Front);
-	else if (m_Rear < m_Front)
-		return ((m_MemoryLast - m_Front) + (m_Rear - m_RingBuffer + 1));
-	// 디버그용
-	else
-		return (m_Size * 2);
+	return (m_Rear - m_RingBuffer + 1) + (m_MemoryLast - m_Front);
+	
 }
 
 
 int CRingBuffer::GetFreeSize(void)
 {
-	if (isEmpty())
-		return m_Size;
-	else if (m_Rear > m_Front)
-		return ((m_MemoryLast - m_Rear) + (m_Front - m_RingBuffer));
-	else if (m_Rear < m_Front)
-		return ((m_Front - m_Rear) - 1);
-	// 디버그용
-	else
-		return (m_Size * 2);
+	if (m_Rear >= m_Front)
+		return (m_MemoryLast - m_Rear) + (m_Front - m_RingBuffer);
+	return (m_Front - m_Rear) - 1;
 }
 
 int CRingBuffer::DirectEnqueueSize(void)
 {
+
 	if (m_Rear >= m_Front)
-		return (m_MemoryLast - m_Rear);
+		return (m_MemoryLast - m_Rear + 1);
 	else if (m_Rear < m_Front)
 		return ((m_Front - m_Rear) - 1);
-	// 디버그용
-	else
-		return (m_Size * 2);
+
 
 }
 int CRingBuffer::DirectDequeueSize(void)
@@ -87,10 +73,7 @@ int CRingBuffer::DirectDequeueSize(void)
 	if (m_Rear >= m_Front)
 		return (m_Rear - m_Front);
 	if (m_Rear < m_Front)
-		return (m_MemoryLast - m_Front);
-	// 디버그용
-	else
-		return (m_Size * 2);
+		return (m_MemoryLast - m_Front + 1);
 
 }
 
@@ -179,7 +162,6 @@ void CRingBuffer::MoveFront(int iSize)
 {
 	if (iSize > DirectDequeueSize())
 	{
-		//Rear위치 처음으로 옮기고
 		m_Front = m_RingBuffer + (iSize - DirectDequeueSize() - 1);
 	}
 	else
@@ -190,7 +172,6 @@ void CRingBuffer::MoveFront(int iSize)
 
 void CRingBuffer::ClearBuffer(void)
 {
-	// 디버그용으로 front랑 rear만 처음으로 이동해버림
 	m_Front = m_RingBuffer;
 	m_Rear = m_RingBuffer;
 }

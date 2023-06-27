@@ -13,7 +13,6 @@ public:
 
 	void Resize(int size);
 	int GetBufferSize(void);
-	bool isEmpty(void);
 	/////////////////////////////////////////////////////////////////////////
 	// 현재 사용중인 용량 얻기.
 	//
