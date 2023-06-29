@@ -1,0 +1,7 @@
+﻿  main.cpp
+F:\code\portfolio\Tools\Ringbuffer_Thread\Ringbuffer\main.cpp(8,7): warning C4101: 'str2' :참조되지 않은 지역 변수입니다.
+  Ringbuffer.cpp
+  코드를 생성하고 있습니다...
+F:\code\portfolio\Tools\Ringbuffer_Thread\Ringbuffer\Ringbuffer.cpp(70): warning C4715: 'CRingBuffer::DirectEnqueueSize': 모든 제어 경로에서 값을 반환하지는 않습니다.
+F:\code\portfolio\Tools\Ringbuffer_Thread\Ringbuffer\Ringbuffer.cpp(78): warning C4715: 'CRingBuffer::DirectDequeueSize': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  Ringbuffer.vcxproj -> F:\code\portfolio\Tools\Ringbuffer_Thread\Debug\Ringbuffer.exe
